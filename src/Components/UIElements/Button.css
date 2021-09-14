@@ -1,0 +1,10 @@
+.button {
+    background: var(--primary-light1);
+    border: 1px solid var(--primary-dark4);
+    font-size: 24px;
+}
+
+.button:hover {
+    background: var(--primary-dark2);
+    color: var(--primary-light1);
+}

@@ -1,0 +1,11 @@
+.integerKeypad {
+    display: grid;
+    grid-template-columns: repeat(3, var(--button-size));
+    grid-template-rows:repeat(4, var(--button-size));
+    grid-column: 1/4;
+    grid-row: 2/5;
+}
+
+.integerKeypad .button:nth-child(10) {
+    grid-column: 1/3;
+}

@@ -1,0 +1,11 @@
+.optionsKeypad {
+    display: grid;
+    grid-template-columns: repeat(5, var(--button-size));
+    grid-template-rows: repeat(1, var(--button-size));
+    grid-column: 1/5;
+    grid-row: 1/2;
+}
+
+.optionsKeypad button:first-child {
+    grid-column: 1/3;
+}

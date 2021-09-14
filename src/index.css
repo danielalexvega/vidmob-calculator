@@ -1,13 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap");
+
+:root {
+  --primary-dark4: #161C0D;
+  --primary-dark3: #83A84D; /* Sab Green */
+  --primary-dark2: #637e3a; /* Sab Green */
+  --primary-dark1: #2c3819; /* Kombu Green */
+  --primary: #8eb257; /* Olivine */
+  --primary-light2: #9ebd6e; /* Olivine */
+  --primary-light3: #bcd29d;
+  --primary-light1: #c6d8ab; /* Tea Green */
+
+  --max-width: 1440px;
+
+  --font1: "Quicksand", sans-serif;
+  --button-size: 3rem;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: var(--primary-dark3);
+  font-family: var(--font1);
+  display: grid;
+  grid-template-columns: 1fr var(--max-width) 1fr;
+}
+
+#root {
+  grid-column: 2/-2;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

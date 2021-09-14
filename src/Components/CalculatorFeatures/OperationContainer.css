@@ -1,0 +1,11 @@
+.operationKeypad {
+    display: grid;
+    grid-template-columns: repeat(2, var(--button-size));
+    grid-template-rows: repeat(5, var(--button-size));
+    grid-column: 4/6;
+    grid-row: 2/6;
+}
+
+.operationKeypad .button:last-child {
+    grid-column: 1/3;
+}
