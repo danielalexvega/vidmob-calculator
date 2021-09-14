@@ -28,8 +28,7 @@ const CalculatorContainer = () => {
         return opertionsArr;
     }
 
-    function calculuate(valueArr) {
-        let operationsIndexArr = findOperations(valueArr);
+    function findIntegerOperationArr(valueArr, operationsIndexArr) {
         let integerArr = [];
         let operationArr = [];
         let tempInt = "";
@@ -47,8 +46,21 @@ const CalculatorContainer = () => {
             }
         }
         integerArr.push(parseInt(tempInt, 10));
-        console.log(integerArr);
-        console.log(operationArr);
+
+        return { integerArr, operationArr };
+    }
+
+    function calculuate(valueArr) {
+        let operationsIndexArr = findOperations(valueArr);
+        let { integerArr, operationArr } = findIntegerOperationArr(valueArr, operationsIndexArr);
+
+        console.log(integerArr);  // integer array
+        console.log(operationArr);  //operation array
+
+        // Need to check for double negatives
+        // need to check for parenthesis
+        // do the math
+
     }
 
     const handleIntegerClick = (event) => {
