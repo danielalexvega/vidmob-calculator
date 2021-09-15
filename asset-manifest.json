@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/vidmob-calculator/static/css/main.d7dd1388.chunk.css",
+    "main.js": "/vidmob-calculator/static/js/main.54fc3069.chunk.js",
+    "main.js.map": "/vidmob-calculator/static/js/main.54fc3069.chunk.js.map",
+    "runtime-main.js": "/vidmob-calculator/static/js/runtime-main.1b590765.js",
+    "runtime-main.js.map": "/vidmob-calculator/static/js/runtime-main.1b590765.js.map",
+    "static/js/2.bc1ff49e.chunk.js": "/vidmob-calculator/static/js/2.bc1ff49e.chunk.js",
+    "static/js/2.bc1ff49e.chunk.js.map": "/vidmob-calculator/static/js/2.bc1ff49e.chunk.js.map",
+    "index.html": "/vidmob-calculator/index.html",
+    "static/css/main.d7dd1388.chunk.css.map": "/vidmob-calculator/static/css/main.d7dd1388.chunk.css.map",
+    "static/js/2.bc1ff49e.chunk.js.LICENSE.txt": "/vidmob-calculator/static/js/2.bc1ff49e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1b590765.js",
+    "static/js/2.bc1ff49e.chunk.js",
+    "static/css/main.d7dd1388.chunk.css",
+    "static/js/main.54fc3069.chunk.js"
+  ]
+}
