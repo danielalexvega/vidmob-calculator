@@ -2,7 +2,8 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    margin:3rem 0;
+    margin:3rem auto;
+    width: 15rem;
 }
 
 .integer-operation__container {

@@ -9,55 +9,33 @@ import "./CalculatorContainer.css";
 
 import OPERATION_ARR from '../SharedStatic/OPERATION_ARR';
 
+import {
+    removeDoubleNegatives,
+    leadingNegative,
+    plusMinus, findOperations,
+    findIntegerOperationArr,
+    solveSetup,
+    solve,
+    handleDecimals
+} from "../Functions/functions";
+
 const CalculatorContainer = () => {
     const [display, setDisplay] = useState('');
     const [containsError, setContainsError] = useState(false);
 
-    function removeDoubleNegatives(valueArr) {
-        for (let i = 0; i < valueArr.length - 1; i++) {
-            if (valueArr[i] === "-" && valueArr[i + 1] === "-") {
-                valueArr[i] = "+";
-                valueArr.splice(i + 1, 1);
-            }
-        }
-
-        return valueArr;
-    }
-
-    function leadingNegative(valueArr) {
-        if (valueArr.length > 1 && valueArr[0] === "-" && valueArr[1] !== "-") {
-            let updatedValue = "-" + valueArr[1]
-            valueArr.splice(0, 2, updatedValue);
-        }
-
-        console.log(valueArr);
-        return valueArr;
-    }
-
-    function plusMinus(valueArr) {
-        for (let i = 0; i < valueArr.length - 1; i++) {
-            if (valueArr[i] === "+" && valueArr[i + 1] === "-") {
-                valueArr[i] = "-";
-                valueArr.splice(i + 1, 1);
-            }
-        }
-
-        return valueArr;
-    }
-
-    function containsParenthesis(valueArr) {
+    function containsParenthesis(equation) {
         let validEquation = false;
         let containsFrontParenthesis = false;
-        for (let i = 0; i < valueArr.length - 1; i++) {
-            if (valueArr[i] === ")" && !containsFrontParenthesis) {
+        for (let i = 0; i < equation.length - 1; i++) {
+            if (equation[i] === ")" && !containsFrontParenthesis) {
                 displayError();
                 return;
             }
 
-            if (valueArr[i] === "(") {
+            if (equation[i] === "(") {
                 containsFrontParenthesis = true;
-                for (let j = i + 1; j < valueArr.length; j++) {
-                    if (valueArr[j] === ")") {
+                for (let j = i + 1; j < equation.length; j++) {
+                    if (equation[j] === ")") {
                         validEquation = true;
                     }
                 }
@@ -71,44 +49,20 @@ const CalculatorContainer = () => {
         return validEquation;
     }
 
-
-    function findOperations(valueArr) {
-        let modifiedOperationsArr = [...OPERATION_ARR];
-        modifiedOperationsArr.push("(");
-        modifiedOperationsArr.push(")");
-        let opertionsArr = [];
-        valueArr.forEach((value, index) => {
-            if (modifiedOperationsArr.includes(value)) {
-                opertionsArr.push(index);
-            }
-        });
-
-        return opertionsArr;
-    }
-
-    function findIntegerOperationArr(valueArr, operationsIndexArr) {
-        let integerArr = [];
-        let operationArr = [];
-        let tempInt = "";
-        for (let i = 0; i < valueArr.length; i++) {
-            if (!operationsIndexArr.includes(i) && !operationsIndexArr.includes(i + 1)) {
-                tempInt += valueArr[i];
-            } else if (!operationsIndexArr.includes(i)) {
-                tempInt += valueArr[i];
-                integerArr.push(parseInt(tempInt, 10));
-                tempInt = "";
-            } else {
-                operationArr.push(valueArr[i])
-            }
-        }
-        integerArr.push(parseInt(tempInt, 10));
-
-        return { integerArr, operationArr };
-    }
-
     function displayError() {
         setContainsError(true);
         setDisplay("Error");
+    }
+
+    function checkForMultipleOperations(equation) {
+        for (let i = 0; i < equation.length - 1; i++) {
+            if (OPERATION_ARR.includes(equation[i])
+                && equation[i] !== "-"
+                && OPERATION_ARR.includes(equation[i + 1])
+                && equation[i + 1] !== "-") {
+                displayError();
+            }
+        }
     }
 
     function simplifyEquation(equation) {
@@ -135,106 +89,24 @@ const CalculatorContainer = () => {
         return equation;
     }
 
-    function solveSetup(equation) {
-        let operationsIndexArr = findOperations(equation);
-        let integerArr = [];
-        let operationArr = [];
-        let tempInt = "";
-        for (let i = 0; i < equation.length; i++) {
-            if (!operationsIndexArr.includes(i) && !operationsIndexArr.includes(i + 1)) {
-                tempInt += equation[i];
-            } else if (!operationsIndexArr.includes(i)) {
-                tempInt += equation[i];
-                integerArr.push(parseInt(tempInt, 10));
-                tempInt = "";
-            } else {
-                operationArr.push(equation[i])
-            }
-        }
-        integerArr.push(parseInt(tempInt, 10));
-
-        console.log(integerArr);
-        console.log(operationArr);
-
-        let solution = solve(integerArr, operationArr);
-        return solution;
-    }
-
-    function solve(integerArr, operationArr) {
-        let first_order = ["*", "/", "%"];
-        let second_order = ["+", "-"];
-
-        console.log("before everything");
-        console.log(integerArr);
-        console.log(operationArr);
-
-        //first order operations
-        for (let i = 0; i < integerArr.length - 1; i++) {
-            if (first_order.includes(operationArr[i])) {
-                let tempSolution = operate(operationArr[i], integerArr[i], integerArr[i + 1]);
-
-                operationArr.splice(i, 1);
-                integerArr.splice(i, 2, tempSolution)
-                i--;
-
-                console.log(`We got here`);
-                console.log(operationArr);
-                console.log(integerArr);
-            }
-        }
-        if (integerArr.length === 1) {
-            return integerArr[0];
-        }
-
-        let solution = 0;
-
-        for (let i = 0; i < integerArr.length - 1; i++) {
-            if (second_order.includes(operationArr[i]) && solution === 0) {
-                solution = operate(operationArr[i], integerArr[i], integerArr[i + 1]);
-            } else {
-                solution = operate(operationArr[i], solution, integerArr[i + 1]);
-            }
-        }
-
-        console.log(`the solution is ${solution}`);
-
-        return solution;
-    }
-
-    function operate(operation, value1, value2) {
-        let solution;
-        switch (operation) {
-            case "+":
-                solution = value1 + value2;
-                break;
-            case "-":
-                solution = value1 - value2;
-                break;
-            case "*":
-                solution = value1 * value2;
-                break;
-            case "/":
-                solution = value1 / value2;
-                break;
-            case "%":
-                solution = value1 % value2;
-                break;
-            default:
-        }
-        return solution;
-    }
-
+    //This function is called when the "=" is pressed
     function calculuate(display) {
+        //turn the display state into a string
         let equation = display.split("");
 
-        if (OPERATION_ARR.includes(equation[equation.length - 1])) {
+        //if the last value is an operation, throw an error
+        if (OPERATION_ARR.includes(equation[equation.length - 1])
+            && equation[equation.length - 1] !== "!") {
             displayError();
             return;
         }
 
-        equation = removeDoubleNegatives(equation);
-        equation = leadingNegative(equation);
-        equation = plusMinus(equation);
+        checkForMultipleOperations(equation);
+
+        equation = removeDoubleNegatives(equation); //remove double negatives
+        equation = leadingNegative(equation); //remove leading negative
+        equation = plusMinus(equation); // turn any "+-" to -
+        equation = handleDecimals(equation);
 
         //check for parenthesis
         if (containsParenthesis(equation)) {
@@ -247,17 +119,22 @@ const CalculatorContainer = () => {
 
         //at this point there are no parenthesis
 
-
         let operationsIndexArr = findOperations(equation);
         let { integerArr, operationArr } = findIntegerOperationArr(equation, operationsIndexArr);
         let solution = solve(integerArr, operationArr);
-
-        console.log(`This is the final solution: ${solution}`);
+        setDisplay(solution);
 
     }
 
-    const handleIntegerClick = (event) => {
+    const handleInput = event => {
+        setDisplay(() => event.target.value);
+    }
 
+    const handleSubmit = (event) => {
+        console.log(event.key);
+    }
+
+    const handleIntegerClick = (event) => {
         switch (event.target.value) {
             case 'AC':
                 setDisplay('');
@@ -269,14 +146,13 @@ const CalculatorContainer = () => {
             default:
                 setDisplay(() => display + event.target.value);
                 break;
-
         }
     }
 
 
     return (
         <div className="calculator__container">
-            <CalculatorDisplay display={display} />
+            <CalculatorDisplay display={display} handleInput={handleInput} onSubmit={handleSubmit} />
             <div className="integer-operation__container">
                 <OptionsContainer handleOptionsClick={handleIntegerClick} />
                 <IntegerKeypad handleButtonClick={handleIntegerClick} />

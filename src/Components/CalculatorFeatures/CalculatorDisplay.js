@@ -2,11 +2,15 @@ import React from 'react';
 
 import "./CalculatorDisplay.css";
 
-const CalculatorDisplay = ({display}) => {
+const CalculatorDisplay = ({ display, handleInput, handleSubmit }) => {
     return (
-        <div className="calculator-display">
-            <p>{display}</p>
-        </div>
+            <input
+                className="calculator-display"
+                type="test"
+                onChange={handleInput}
+                value={display}
+                onKeyDown={handleSubmit}
+            />
     )
 }
 

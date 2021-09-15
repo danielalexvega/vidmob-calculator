@@ -1,10 +1,12 @@
 .calculator-display {
-  width: 142px;
   font-size: 20px;
   background: white;
   height: fit-content;
   min-height: 48px;
   border: 1px solid black;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 
 }
 
