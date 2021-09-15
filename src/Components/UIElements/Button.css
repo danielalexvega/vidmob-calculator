@@ -6,5 +6,5 @@
 
 .button:hover {
     background: var(--primary-dark2);
-    color: var(--primary-light1);
+    color: var(--light);
 }

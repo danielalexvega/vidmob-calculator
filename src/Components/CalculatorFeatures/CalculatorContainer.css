@@ -11,3 +11,25 @@
     grid-template-columns: repeat(5, var(--button-size));
     grid-template-rows: repeat(5, var(--button-size));
 }
+
+
+.error {
+    margin-top: 2rem;
+    width: 10rem;
+    text-align: center;
+}
+
+.error h4 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 32px;
+    background-color: #AD343E;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.error p {
+    color: var(--light);
+    font-size: 18px;
+    
+}

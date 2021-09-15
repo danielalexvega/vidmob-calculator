@@ -16,7 +16,8 @@ import {
     findIntegerOperationArr,
     solveSetup,
     solve,
-    handleDecimals
+    handleDecimals,
+    handleFactorial
 } from "../Functions/functions";
 
 const CalculatorContainer = () => {
@@ -57,7 +58,7 @@ const CalculatorContainer = () => {
     function checkForMultipleOperations(equation) {
         for (let i = 0; i < equation.length - 1; i++) {
             if (OPERATION_ARR.includes(equation[i])
-                && equation[i] !== "-"
+                && (equation[i] !== "-" && equation[i] !== "!")
                 && OPERATION_ARR.includes(equation[i + 1])
                 && equation[i + 1] !== "-") {
                 displayError();
@@ -108,6 +109,11 @@ const CalculatorContainer = () => {
         equation = plusMinus(equation); // turn any "+-" to -
         equation = handleDecimals(equation);
 
+        if(equation.includes("!")) {
+            handleFactorial(equation);
+        }
+
+
         //check for parenthesis
         if (containsParenthesis(equation)) {
             do {
@@ -122,6 +128,11 @@ const CalculatorContainer = () => {
         let operationsIndexArr = findOperations(equation);
         let { integerArr, operationArr } = findIntegerOperationArr(equation, operationsIndexArr);
         let solution = solve(integerArr, operationArr);
+
+        if(isNaN(solution)) {
+            displayError();
+            return;
+        }
         setDisplay(solution);
 
     }
@@ -143,6 +154,9 @@ const CalculatorContainer = () => {
             case '=':
                 calculuate(display);
                 break;
+            case 'Del':
+                setDisplay(()=> display.toString().substring(0, display.length - 1));
+                break;
             default:
                 setDisplay(() => display + event.target.value);
                 break;
@@ -158,7 +172,10 @@ const CalculatorContainer = () => {
                 <IntegerKeypad handleButtonClick={handleIntegerClick} />
                 <OperationContainer handleButtonClick={handleIntegerClick} />
             </div>
-            {containsError && <div>ERROR</div>}
+            {containsError && <div className="error">
+                <h4>ERROR</h4>
+                <p>No worries, just hit "AC" and try again!</p>
+            </div>}
         </div>
     )
 }

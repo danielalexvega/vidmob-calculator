@@ -10,7 +10,8 @@ const OptionsContainer = ({handleOptionsClick}) => {
         { value: "AC", label: "AC" },
         { value: "(", label: "(" },
         { value: ")", label: ")" },
-        { value: ".", label: "." }
+        { value: ".", label: "." },
+        {value: "Del", label: "Del"}
     ]
 
 

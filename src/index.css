@@ -1,14 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap");
 
 :root {
-  --primary-dark4: #161C0D;
-  --primary-dark3: #83A84D; /* Sab Green */
-  --primary-dark2: #637e3a; /* Sab Green */
-  --primary-dark1: #2c3819; /* Kombu Green */
-  --primary: #8eb257; /* Olivine */
-  --primary-light2: #9ebd6e; /* Olivine */
-  --primary-light3: #bcd29d;
-  --primary-light1: #c6d8ab; /* Tea Green */
+  --primary-dark4: #000000;
+  --primary-dark3: #e45c3a; /* Orange Soda */
+  --primary-dark2: #d7431d; /* Vermillion */
+  --primary-dark1: #b43718; /* Chinese Red */
+  --primary: #e76f51; /* Burnt Sienna */
+  --primary-light2: #eb886f; /* Middle Red */
+  --primary-light3: #eb886f; /* Vivid Tangerine */
+  --primary-light1: #eb886f; /* Melon */
+  --light: #f8d2c9; /* Pale Pink*/
+
+  --charcoal: #264653;
+  --persian-green: #2a9d8f;
+  --prussian-blue: #00547A;
+
+  --secondary: #E9C46A;
+  --secondary-dark: #E2B33C;
+
 
   --max-width: 1440px;
 
@@ -16,12 +25,33 @@
   --button-size: 3rem;
 }
 
+.title {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  font-size: 50px;
+  margin: 2rem;
+  color: var(--light);
+}
+
+@media screen and (max-width: 500px) {
+  .title {
+    flex-flow: column;
+    align-items: center;
+  }
+}
+
+.title::after {
+  content: "✌🏼";
+}
+
 body {
   margin: 0;
-  background: var(--primary-dark3);
+  /* background: var(--persian-green); */
+  background: var(--prussian-blue);
   font-family: var(--font1);
   display: grid;
-  grid-template-columns: 1fr var(--max-width) 1fr;
+  grid-template-columns: 1fr minmax(auto, var(--max-width)) 1fr;
 }
 
 #root {

@@ -189,6 +189,42 @@ function operate(operation, value1, value2) {
     return solution;
 }
 
+function handleFactorial(equation) {
+    for (let i = 0; i < equation.length; i++) {
+        if (equation[i] === "!") {
+            let startIndex = i - 1;
+            if (startIndex >= 0) {
+                while (startIndex > 0 && !OPERATION_ARR.includes(equation[startIndex])) {
+                    startIndex--;
+                }
+            }
+
+            let value = "";
+
+            for(let j = startIndex; j < i; j++) {
+                value += equation[j];
+            }
+            let length = value.length;
+            value = parseFloat(value);
+            let factorial = value;
+            console.log(`the value is ${value}`);
+
+            while(value > 2) {
+                value--;
+                factorial = factorial * value;
+            }
+            console.log(`the factorial is ${factorial}`);
+            console.log(value.length);
+
+            equation.splice((startIndex), length + 1, factorial);
+            console.log(equation);
+
+            return equation;
+        }
+    }
+    return equation;
+}
 
 
-export { removeDoubleNegatives, leadingNegative, plusMinus, findOperations, findIntegerOperationArr, solveSetup, solve, handleDecimals }
+
+export { removeDoubleNegatives, leadingNegative, plusMinus, findOperations, findIntegerOperationArr, solveSetup, solve, handleDecimals, handleFactorial }
