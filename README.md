@@ -12,6 +12,8 @@ I had a lot of fun on this project. I hope you enjoy my parks and rec reference.
 
 I look forward to discussing my thought process. 
 
+![](calculator.png)
+
 
 
 
