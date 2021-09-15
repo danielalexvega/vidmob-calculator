@@ -2,7 +2,7 @@
 
 Please download, do an npm install, and enjoy. 
 
-##Features
+## Features
 
 This little calculator can add, subtract, multiply, divide, do modulus, and even factorials. 
 
