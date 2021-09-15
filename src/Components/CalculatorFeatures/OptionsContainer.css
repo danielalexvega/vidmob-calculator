@@ -18,3 +18,7 @@
 .optionsKeypad button:last-child {
   font-size: 20px;
 }
+
+.optionsKeypad button:last-child {
+    grid-column: 4/6;
+  }
