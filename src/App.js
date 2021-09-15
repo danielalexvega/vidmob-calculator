@@ -3,7 +3,7 @@ import CalculatorContainer from "./Components/CalculatorFeatures/CalculatorConta
 function App() {
   return (
     <div className="App">
-      <h1 className="title">Cal... cu... lator!</h1>
+      <h1 className="title">CALC... YOU... LATER!</h1>
       <CalculatorContainer />
     </div>
   );
